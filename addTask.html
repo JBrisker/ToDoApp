@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width =device-width, initial-scale =1.0" />
+    <link rel="stylesheet" href="addTaskStyle.css" />
+    <title>2 Due App</title>
+  </head>
+  <body>
+    <h1>Add Task</h1>
+    <div id="taskEvent">
+      <form>
+        <label for="tname">Task: </label>
+        <input type="text" id="tname" name="tname" />
+        <label for="taskPriority">Priority:</label>
+        <select id="taskPriority">
+          <option>low</option>
+          <option>medium</option>
+          <option>High</option>
+        </select>
+        <label for="taskStatus">Status:</label>
+        <select id="taskStatus">
+          <option>Not Started</option>
+          <option>In Progress</option>
+          <option>Completed</option>
+        </select>
+        <table>
+          <tbody id="taskTable"></tbody>
+        </table>
+        <label for="addButton"></label>
+        <button id="addButton" onclick="AddTask()" type="submit">Add</button>
+        <label for="doneButton"></label>
+        <button
+          id="doneButton"
+          type="button"
+          onclick="location.href = 'index.html'"
+        >
+          Done
+        </button>
+      </form>
+    </div>
+    <script src="main.js" defer></script>
+  </body>
+</html>

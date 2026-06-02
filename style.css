@@ -1,0 +1,54 @@
+body {
+  background-color: rgb(12, 160, 179);
+}
+h1 {
+  text-align: center;
+  font-weight: bolder;
+  font-size: 65px;
+  color: whitesmoke;
+}
+
+button {
+  display: row;
+  justify-content: center;
+  background-color: cadetblue;
+  font-weight: bold;
+  font-size: 35px;
+  width: auto;
+  height: auto;
+  margin: 10px;
+  padding: 5px;
+  color: white;
+  border-radius: 25px;
+}
+.complete {
+  background-color: lightgreen;
+  pointer-events: none;
+}
+.selected {
+  background-color: aquamarine;
+}
+table {
+  margin: auto;
+  width: 80%;
+  justify-content: center;
+  height: auto;
+  border-collapse: separate;
+}
+tr {
+  margin: auto;
+  padding: 20px;
+  background-color: aliceblue;
+  font-weight: bold;
+  margin: 25px;
+  font-size: 25px;
+  border-radius: 25px;
+  white-space: nowrap;
+}
+th {
+  background-color: aliceblue;
+  font-weight: bolder;
+  padding: 20px;
+  font-size: 35px;
+  margin: 40px;
+}

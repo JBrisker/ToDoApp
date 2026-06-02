@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale =1.0" />
+    <meta http-equiv="Z-UA-Compatible" />
+    <title>2 Due App</title>
+    <link rel="stylesheet" href="updateTaskStyle.css" />
+  </head>
+  <body>
+    <div >
+      <form id="taskForm">
+        <label for="task">Task: </label>
+        <input type="text" id="task" name="task" placeholder="Task Name" />
+        <label for="priority">Priority:</label>
+        <select id="priority">
+          <option>High</option>
+          <option>Medium</option>
+          <option>Low</option>
+        </select>
+        <label for="status">Status:</label>
+        <select id="status">
+          <option>Not Started</option>
+          <option>In Progress</option>
+          <option>Completed</option>
+        </select>
+        <button id="save" type="submit" onclick ="SaveTask()">Save</button>
+        <button id = cancel type = "reset" onclick ="location.href='index.html'">Cancel</button>
+      </form>
+     <table>
+      <thead>
+      </thead>
+      <tbody id="taskTable"></tbody>
+    </div>
+    <script src ="main.js" defer></script>
+    </script>
+  </body>
+</html>
