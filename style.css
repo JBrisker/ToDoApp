@@ -9,21 +9,24 @@ h1 {
 }
 
 button {
-  display: row;
-  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-evenly;
   background-color: cadetblue;
   font-weight: bold;
   font-size: 35px;
   width: auto;
-  height: auto;
-  margin: 10px;
-  padding: 5px;
+  margin: 25px;
+  padding: 20px;
+
   color: white;
   border-radius: 25px;
 }
-.complete {
+.completed {
   background-color: lightgreen;
   pointer-events: none;
+  opacity: 0.6;
 }
 .selected {
   background-color: aquamarine;
