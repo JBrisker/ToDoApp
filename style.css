@@ -9,9 +9,6 @@ h1 {
 }
 
 button {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
   justify-content: space-evenly;
   background-color: cadetblue;
   font-weight: bold;
@@ -19,20 +16,19 @@ button {
   width: auto;
   margin: 25px;
   padding: 20px;
-
   color: white;
   border-radius: 25px;
 }
 .completed {
   background-color: lightgreen;
-  pointer-events: none;
+  text-decoration: line-through;
   opacity: 0.6;
 }
 .selected {
-  background-color: aquamarine;
+  background-color: rgb(10, 255, 194);
 }
 table {
-  margin: auto;
+  margin: 25px auto;
   width: 80%;
   justify-content: center;
   height: auto;

@@ -2,6 +2,7 @@ const tableBody = document.getElementById("taskTable");
 
 const taskList = JSON.parse(localStorage.getItem("taskList")) || [];
 const page = window.location.pathname;
+
 if (page.endsWith("index.html")) DisplayTask();
 
 tableBody.addEventListener("click", (e) => {
@@ -13,7 +14,7 @@ tableBody.addEventListener("click", (e) => {
   tr.classList.add("selected");
 });
 
-//progress task with double click
+//progress tasks with double clicks
 tableBody.addEventListener("dblclick", (e) => {
   const tableRow = e.target.closest("tr");
   if (!tableRow) return;
@@ -22,7 +23,11 @@ tableBody.addEventListener("dblclick", (e) => {
 
   const taskList = JSON.parse(localStorage.getItem("taskList")) || [];
 
-  if (taskList[index].status === "Not Started") {
+  //change task status based on previous status
+  if (taskList[index].status === "Completed") {
+    tableRow.classList.remove("completed");
+    taskList[index].status = "Not Started";
+  } else if (taskList[index].status === "Not Started") {
     taskList[index].status = "In Progress";
   } else if (taskList[index].status === "In Progress") {
     tableRow.classList.add("completed");
@@ -31,6 +36,7 @@ tableBody.addEventListener("dblclick", (e) => {
     tableRow.classList.remove("completed");
     taskList[index].status = "In Progress";
   }
+  location.reload();
   // re-save task list
   localStorage.setItem("taskList", JSON.stringify(taskList));
 });
@@ -41,6 +47,7 @@ param: newRow,newTask,newPriority,newStatus,taskItem
 return:
 */
 function DisplayTask() {
+  tableBody.innerHTML = "";
   //create table row
   for (let taskItem of taskList) {
     const newRow = document.createElement("tr");
@@ -56,7 +63,9 @@ function DisplayTask() {
     try {
       newRow.appendChild(newTask);
       newRow.appendChild(newPriority);
-
+      if (taskItem.status === "Completed") {
+        newRow.classList.add("completed");
+      }
       newRow.appendChild(newStatus);
       switch (taskItem.priority) {
         case "High":
@@ -208,6 +217,6 @@ function ClearTasks() {
   }
   taskList.length = 0;
   localStorage.clear();
-  alert("List Cleared");
+  alert("Tasks Cleared");
   taskTable.innerHTML = "";
 }
