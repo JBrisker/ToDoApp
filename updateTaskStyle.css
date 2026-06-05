@@ -1,23 +1,26 @@
 #taskForm {
   font-size: 40px;
-  width: 50%;
-  height: 75%;
-  padding: 10px;
-  margin: 20px;
+  width: auto;
+  height: auto;
+  padding: 15px;
+  margin: 40px;
   background-color: aquamarine;
   line-height: 4em;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 25px;
 }
-
+body {
+  background-color: lightblue;
+}
 button {
   background-color: cadetblue;
   font-weight: bold;
   font-size: 35px;
   width: auto;
   height: auto;
-  margin: 5px;
+  margin: 15px;
   padding: 6px;
   color: white;
   border-radius: 25px;

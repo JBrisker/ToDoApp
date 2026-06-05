@@ -8,6 +8,13 @@
   </head>
   <body>
     <h1>2 Due App</h1>
+    <label for="sort">Sort By: </label>
+    <select id="sort" onchange="SortTasks()">
+      <option id="defaultSort"></option>
+      <option>Alphabetical</option>
+      <option>Priority</option>
+      <option>Status</option>
+    </select>
     <table>
       <thead>
         <th>Task</th>

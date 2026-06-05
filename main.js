@@ -4,6 +4,7 @@ const taskList = JSON.parse(localStorage.getItem("taskList")) || [];
 const page = window.location.pathname;
 
 if (page.endsWith("index.html")) DisplayTask();
+if (page.endsWith("updateTask.html")) PopulateUpdatePage();
 
 tableBody.addEventListener("click", (e) => {
   const tr = e.target.closest("tr");
@@ -69,13 +70,13 @@ function DisplayTask() {
       newRow.appendChild(newStatus);
       switch (taskItem.priority) {
         case "High":
-          newRow.style.color = "red";
+          newRow.style.color = "#FB4141";
           break;
         case "Medium":
-          newRow.style.color = "orange";
+          newRow.style.color = "#FF9B2F";
           break;
         case "Low":
-          newRow.style.color = "green";
+          newRow.style.color = "#78C841";
           break;
       }
       tableBody.appendChild(newRow);
@@ -149,7 +150,7 @@ function UpdateTask() {
   //navigate to update page
   window.location.href = "updateTask.html";
 }
-if (page.endsWith("updateTask.html")) PopulateUpdatePage();
+
 //populate update page with selected task information
 function PopulateUpdatePage() {
   const taskItem = JSON.parse(localStorage.getItem("taskItem"));
@@ -219,4 +220,44 @@ function ClearTasks() {
   localStorage.clear();
   alert("Tasks Cleared");
   taskTable.innerHTML = "";
+}
+
+function SortTasks() {
+  const sortSelection = document.getElementById("sort").value;
+  switch (sortSelection) {
+    case "Alphabetical":
+      SortAlpha();
+      break;
+    case "Priority":
+      SortPriority();
+      break;
+    case "Status":
+      SortStatus();
+      break;
+  }
+  location.reload();
+}
+//AI generated sorting function to sort by alphabet
+function SortAlpha() {
+  taskList.sort((a, b) => a.task.localeCompare(b.task));
+  localStorage.setItem("taskList", JSON.stringify(taskList));
+  location.reload();
+}
+
+// function created to sort by priority
+function SortPriority() {
+  const priorityOptions = { High: 3, Medium: 2, Low: 1 };
+  taskList.sort(
+    (a, b) => priorityOptions[b.priority] - priorityOptions[a.priority],
+  );
+  localStorage.setItem("taskList", JSON.stringify(taskList));
+  location.reload();
+}
+
+//AI generated function to sort by status
+function SortStatus() {
+  const statusOptions = { "Not Started": 1, "In Progress": 2, Completed: 3 };
+  taskList.sort((a, b) => statusOptions[a.status] - statusOptions[b.status]);
+  localStorage.setItem("taskList", JSON.stringify(taskList));
+  location.reload();
 }
