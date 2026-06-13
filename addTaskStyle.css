@@ -1,8 +1,7 @@
 body {
-  background-color: cornflowerblue;
+  background-color: lightblue;
 }
 h1 {
-  color: white;
   text-align: center;
   font-weight: bolder;
   font-size: 65px;
@@ -17,7 +16,7 @@ h1 {
   height: auto;
   padding: 10px;
   margin: 20px;
-  background-color: aquamarine;
+  background-color: lightcyan;
   line-height: 4em;
 }
 input,
@@ -29,13 +28,13 @@ option {
 }
 
 button {
-  background-color: cadetblue;
+  background-color: #59b292;
   font-weight: bold;
   font-size: 35px;
   width: auto;
   height: auto;
   margin: 5px;
   padding: 6px;
-  color: white;
+  color: aliceblue;
   border-radius: 25px;
 }

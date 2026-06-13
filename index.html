@@ -9,7 +9,7 @@
   <body>
     <h1>2 Due App</h1>
     <label for="sort">Sort By: </label>
-    <select id="sort" onchange="SortTasks()">
+    <select id="sort" onchange="sortTasks()">
       <option id="defaultSort"></option>
       <option>Alphabetical</option>
       <option>Priority</option>
@@ -26,13 +26,13 @@
     <button onclick="location.href = 'addTask.html'" type="button">
       New Task
     </button>
-    <button onclick="DeleteTask()" id="delete" type="submit">
+    <button onclick="deleteTask()" id="delete" type="submit">
       Delete Task
     </button>
-    <button onclick="UpdateTask()" id="update" type="button">
+    <button onclick="updateTask()" id="update" type="button">
       Update Task
     </button>
-    <button onclick="ClearTasks()" type="reset">Clear All</button>
+    <button onclick="clearTasks()" type="reset">Clear All</button>
     <script type="text/javascript" src="main.js" defer></script>
   </body>
 </html>

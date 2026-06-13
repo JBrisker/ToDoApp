@@ -1,10 +1,10 @@
 const tableBody = document.getElementById("taskTable");
-
+const reg = /^A-Za-z0-9_.- $/g;
 const taskList = JSON.parse(localStorage.getItem("taskList")) || [];
 const page = window.location.pathname;
 
-if (page.endsWith("index.html")) DisplayTask();
-if (page.endsWith("updateTask.html")) PopulateUpdatePage();
+if (page.endsWith("index.html")) displayTask();
+if (page.endsWith("updateTask.html")) populateUpdatePage();
 
 tableBody.addEventListener("click", (e) => {
   const tr = e.target.closest("tr");
@@ -47,7 +47,7 @@ with the tasks saved in localStorage
 param: newRow,newTask,newPriority,newStatus,taskItem
 return:
 */
-function DisplayTask() {
+function displayTask() {
   tableBody.innerHTML = "";
   //create table row
   for (let taskItem of taskList) {
@@ -92,25 +92,35 @@ and append to list listen for add click
 params:taskName,priority,status
 return:
 */
-function AddTask() {
+function addTask() {
   const taskName = document.getElementById("tname").value.trim();
   const priority = document.getElementById("taskPriority").value;
   const status = document.getElementById("taskStatus").value;
+
   //ensure input is valid
   if (taskName === "") {
     alert("Enter a task");
     return;
   }
+
   //create new task
   let newTask = {
     task: taskName,
     priority: priority,
     status: status,
   };
-  if (taskList.some((task) => task.task === taskName)) {
+  //validate input
+  if (reg.test(newTask.task.trim())) {
+    alert("Please enter valid task name.");
+    return;
+  } else if (newTask.task.length > 32) {
+    alert("Limit 32 characters");
+    return;
+  } else if (taskList.some((task) => task.task === taskName)) {
     alert("Task already exists");
     return;
   }
+
   taskList.push(newTask);
   alert("Task Added");
   //save to local storage
@@ -118,7 +128,7 @@ function AddTask() {
 }
 
 /* function to delete tasks from list*/
-function DeleteTask() {
+function deleteTask() {
   const selected = tableBody.querySelector(".selected");
   if (!selected) {
     alert("Select task to delete");
@@ -131,11 +141,11 @@ function DeleteTask() {
   // re-save task list
   localStorage.setItem("taskList", JSON.stringify(taskList));
   tableBody.innerHTML = "";
-  DisplayTask();
+  displayTask();
 }
 
 // function to select which task to update
-function UpdateTask() {
+function updateTask() {
   //get selected task
   const selected = tableBody.querySelector(".selected");
 
@@ -152,7 +162,7 @@ function UpdateTask() {
 }
 
 //populate update page with selected task information
-function PopulateUpdatePage() {
+function populateUpdatePage() {
   const taskItem = JSON.parse(localStorage.getItem("taskItem"));
 
   // populate update page with task information
@@ -170,9 +180,9 @@ function PopulateUpdatePage() {
 }
 
 //save updated task information in place of old task information
-function SaveTask() {
+function saveTask() {
   const taskList = JSON.parse(localStorage.getItem("taskList")) || [];
-
+  const taskToUpdate = JSON.parse(localStorage.getItem("taskToUpdate"));
   //updated task information
   const updatedTask = {
     task: document.getElementById("task").value.trim(),
@@ -180,20 +190,24 @@ function SaveTask() {
     status: document.getElementById("status").value,
   };
 
-  const taskToUpdate = JSON.parse(localStorage.getItem("taskToUpdate"));
-
+  if (taskToUpdate.task === null) {
+    alert("Task not found!");
+    return;
+  }
   //find index of task to update
   if (updatedTask.task === "") {
     alert("Task name cannot be empty");
     return;
-  }
-  if (taskToUpdate.task === null) {
-    alert("Task not found");
+  } else if (reg.test(updatedTask.task.trim())) {
+    alert("Please enter valid task name.");
+    return;
+  } else if (updatedTask.task.length > 32) {
+    alert("Limit 32 characters!");
     return;
   }
   const index = taskList.findIndex((task) => task.task === taskToUpdate.task);
   if (index === -1) {
-    alert("Task not found");
+    alert("Task not found!");
     return;
   }
 
@@ -211,7 +225,7 @@ function SaveTask() {
 }
 
 //clear list
-function ClearTasks() {
+function clearTasks() {
   if (taskList.length === 0) {
     alert("Nothing to Clear!");
     return;
@@ -222,30 +236,30 @@ function ClearTasks() {
   taskTable.innerHTML = "";
 }
 
-function SortTasks() {
+function sortTasks() {
   const sortSelection = document.getElementById("sort").value;
   switch (sortSelection) {
     case "Alphabetical":
-      SortAlpha();
+      sortAlpha();
       break;
     case "Priority":
-      SortPriority();
+      sortPriority();
       break;
     case "Status":
-      SortStatus();
+      sortStatus();
       break;
   }
   location.reload();
 }
 //AI generated sorting function to sort by alphabet
-function SortAlpha() {
+function sortAlpha() {
   taskList.sort((a, b) => a.task.localeCompare(b.task));
   localStorage.setItem("taskList", JSON.stringify(taskList));
   location.reload();
 }
 
 // function created to sort by priority
-function SortPriority() {
+function sortPriority() {
   const priorityOptions = { High: 3, Medium: 2, Low: 1 };
   taskList.sort(
     (a, b) => priorityOptions[b.priority] - priorityOptions[a.priority],
@@ -255,7 +269,7 @@ function SortPriority() {
 }
 
 //AI generated function to sort by status
-function SortStatus() {
+function sortStatus() {
   const statusOptions = { "Not Started": 1, "In Progress": 2, Completed: 3 };
   taskList.sort((a, b) => statusOptions[a.status] - statusOptions[b.status]);
   localStorage.setItem("taskList", JSON.stringify(taskList));
