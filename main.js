@@ -98,10 +98,6 @@ function addTask() {
   const status = document.getElementById("taskStatus").value;
 
   //ensure input is valid
-  if (taskName === "") {
-    alert("Enter a task");
-    return;
-  }
 
   //create new task
   let newTask = {
@@ -110,11 +106,14 @@ function addTask() {
     status: status,
   };
   //validate input
-  if (reg.test(newTask.task.trim())) {
-    alert("Please enter valid task name.");
+  if (taskName === "") {
+    alert("Enter a task");
     return;
   } else if (newTask.task.length > 32) {
     alert("Limit 32 characters");
+    return;
+  } else if (reg.test(newTask.task.trim())) {
+    alert("Please enter valid task name.");
     return;
   } else if (taskList.some((task) => task.task === taskName)) {
     alert("Task already exists");
@@ -198,11 +197,11 @@ function saveTask() {
   if (updatedTask.task === "") {
     alert("Task name cannot be empty");
     return;
-  } else if (reg.test(updatedTask.task.trim())) {
-    alert("Please enter valid task name.");
-    return;
   } else if (updatedTask.task.length > 32) {
     alert("Limit 32 characters!");
+    return;
+  } else if (reg.test(updatedTask.task.trim())) {
+    alert("Please enter valid task name.");
     return;
   }
   const index = taskList.findIndex((task) => task.task === taskToUpdate.task);
